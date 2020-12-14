@@ -1,0 +1,4 @@
+*
+!/etc/condor
+!/etc/condor-ce
+!/etc/vomses

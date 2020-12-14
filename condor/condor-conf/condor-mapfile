@@ -1,0 +1,5 @@
+SSL "C=RU/ST=Moscow Region/L=Dubna/O=JINR/O=LIT/OU=NOvA/CN=Service" condor
+#SSL "/C=RU/O=RDIG/OU=hosts/OU=jinr.ru/CN=cloud-ce01.jinr.ru" condor
+KERBEROS JINR.RU = jinr.ru
+#SSL "/C=CN/O=HEP/O=IHEP/OU=CC/CN=Xiaomei Zhang" juno
+GSI "/C=CN/O=HEP/O=IHEP/OU=CC/CN=Xiaomei Zhang" juno

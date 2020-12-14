@@ -1,0 +1,118 @@
+RELEASE_DIR = /usr
+
+LOCAL_DIR = /var
+
+REQUIRE_LOCAL_CONFIG_FILE = TRUE
+#LOCAL_CONFIG_FILE = /nfs/condor/condor-etc/condor_config.$(HOSTNAME)
+LOCAL_CONFIG_FILE = /etc/condor/config.d/local.conf
+####################################################### By E.K. 19.12.2019 ###########
+#LOCAL_CONFIG_DIR = /etc/condor/config.d
+#use SECURITY : HOST_BASED
+ALLOW_WRITE = *.jinr.ru
+#######################################################End of  By E.K. 19.12.2019 ###########
+
+SSH_TO_JOB_SSHD_CONFIG_TEMPLATE = /etc/condor/condor_ssh_to_job_sshd_config_template
+
+#Default is true but who knows... Added by E.K. 26.09.2018
+ENABLE_SSH_TO_JOB = True
+
+#Default is true but who knows... Added by E.K. 26.09.2018
+SCHEDD_ENABLE_SSH_TO_JOB = True
+
+#!
+#UID_DOMAIN = $(FULL_HOSTNAME) 
+#UID_DOMAIN = *
+UID_DOMAIN = jinr.ru
+#!
+
+#ALLOW_WRITE = *.jinr.ru
+
+COLLECTOR_NAME = "NON-OSG-777 JINR Collector at $(UID_DOMAIN)"
+FILESYSTEM_DOMAIN = $(UID_DOMAIN)
+
+
+CONDOR_ADMIN = root@$(FULL_HOSTNAME)
+#CONDOR_HOST = condor.jinr.ru
+CONDOR_HOST = 159-93-221-22.jinr.ru
+#condor.jinr.ru 
+#159-93-221-22.jinr.ru
+IN_HIGHPORT = 9999
+IN_LOWPORT = 9000
+UPDATE_COLLECTOR_WITH_TCP=True
+#IP_ADDRESS = 159.93.221.22
+
+# this default defines the daemon’s needs for authentication over all access levels
+# SEC_DEFAULT_AUTHENTICATION = REQUIRED
+
+SEC_DAEMON_AUTHENTICATION = REQUIRED
+SEC_DAEMON_AUTHENTICATION_METHODS = SSL
+
+SEC_NEGOTIATOR_AUTHENTICATION = REQUIRED 
+SEC_NEGOTIATOR_AUTHENTICATION_METHODS = SSL
+
+#
+SEC_DAEMON_INTEGRITY = REQUIRED
+SEC_DAEMON_ENCRYPTION = REQUIRED
+#
+SEC_CLIENT_AUTHENTICATION_METHODS = ssl,password,fs,gsi,kerberos
+SEC_PASSWORD_FILE = /var/lib/condor/condor_credential
+
+#
+STARTER_ALLOW_RUNAS_OWNER = True
+#!!
+
+ALLOW_DAEMON = condor_pool@*/*, condor@*/*, submit-side@matchsession/*
+
+ALLOW_NEGOTIATOR = condor_pool@*/*, condor@*/*, submit-side@matchsession/*
+
+#
+TRUST_UID_DOMAIN = True
+#!! 
+
+NEGOTIATOR_INTERVAL = 20
+START = TRUE
+SUSPEND = FALSE
+PREEMPT = FALSE
+KILL = FALSE
+
+
+AUTH_SSL_CLIENT_CAFILE = /etc/condor/condor-conf/cndrsrvc.crt
+AUTH_SSL_CLIENT_CERTFILE = /etc/condor/condor-conf/cndrsrvc.crt
+AUTH_SSL_CLIENT_KEYFILE = /etc/condor/condor-conf/cndrsrvc.key
+
+AUTH_SSL_SERVER_CAFILE = /etc/condor/condor-conf/cndrsrvc.crt
+AUTH_SSL_SERVER_CERTFILE = /etc/condor/condor-conf/cndrsrvc.crt
+AUTH_SSL_SERVER_KEYFILE = /etc/condor/condor-conf/cndrsrvc.key
+
+
+
+
+CERTIFICATE_MAPFILE = /etc/condor/condor-conf/condor-mapfile
+
+RUN     = $(LOCAL_DIR)/run/condor
+LOG     = $(LOCAL_DIR)/log/condor
+LOCK    = $(LOCAL_DIR)/lock/condor
+SPOOL   = $(LOCAL_DIR)/lib/condor/spool
+EXECUTE = $(LOCAL_DIR)/lib/condor/execute
+BIN     = $(RELEASE_DIR)/bin
+LIB = $(RELEASE_DIR)/lib64/condor
+INCLUDE = $(RELEASE_DIR)/include/condor
+SBIN    = $(RELEASE_DIR)/sbin
+LIBEXEC = $(RELEASE_DIR)/libexec/condor
+SHARE   = $(RELEASE_DIR)/share/condor
+#/////////////////////////////////////////////////// EK 21.11.2016 //////////////////////
+#USE_NFS = TRUE
+
+
+QUEUE_SUPER_USER_MAY_IMPERSONATE=.*
+
+# Added by N. Balashov 13.12.2019
+
+SOFT_UID_DOMAIN=True
+NO_DNS=True
+DEFAULT_DOMAIN_NAME=jinr.ru
+
+#
+#ALLOW_ADMINISTRATOR = 159-93-221-22.jinr.ru
+#ALLOW_ADMINISTRATOR =  $(CONDOR_HOST)
+# $(IP_ADDRESS)
